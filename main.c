@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define MAX 100
+#define MAX 200
 typedef struct{
-    char nome[100];
-    char isbn[100];
+    char nome[MAX];
+    char isbn[MAX];
     float preco;
     int score;
-    char editora[100];
+    char editora[MAX];
 }livro, *pLivro;
 
 pLivro livro_aloc(int qtde);
@@ -14,10 +14,15 @@ void livro_ler(pLivro livros, int qtde);
 void livro_exibe(pLivro livros, int qtde);
 void livro_desaloca(pLivro livros);
 
+void clear(){
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) { }
+}
+
 
 int main(){
     int qtde;
-    scanf("%d", &qtde);
+    scanf("%d ", &qtde);
     pLivro livros=livro_aloc(qtde);
     livro_ler(livros, qtde);
     livro_exibe(livros, qtde);
@@ -27,16 +32,19 @@ int main(){
 
 
 pLivro livro_aloc(int qtde){
-    pLivro livros=(pLivro)malloc(qtde*sizeof(pLivro));
+    pLivro livros=(pLivro)malloc(qtde*sizeof(livro));
     return livros;
 }
 void livro_ler(pLivro livros, int qtde){
     for(int i=0; i<qtde; i++){
-        gets(livros[i].nome);
-        gets(livros[i].isbn);
-        scanf("%f", &livros[i].preco);
-        scanf("%d", &livros[i].score);
-        gets(livros[i].editora);
+        scanf("%[^\n]s ", livros[i].nome);
+        clear();
+        scanf("%[^\n]s ", livros[i].isbn);
+        clear();
+        scanf("%f ", &livros[i].preco);
+        scanf("%d ", &livros[i].score);
+        scanf("%[^\n]s ", livros[i].editora);
+        clear();
     }
 }
 void livro_exibe(pLivro livros, int qtde){
@@ -44,11 +52,11 @@ void livro_exibe(pLivro livros, int qtde){
         printf("Livro %d:\n", i+1);
         printf("Nome: %s\n", livros[i].nome);
         printf("ISBN: %s\n", livros[i].isbn);
-        printf("Preço: R$ %f\n", livros[i].preco);
+        printf("Preço: R$ %.2f\n", livros[i].preco);
         printf("Score: %d\n", livros[i].score);
         printf("Editora: %s\n", livros[i].editora);
+        printf("\n");
     }
-    printf("\n");
 }
 void livro_desaloca(pLivro livros){
     free(livros);
