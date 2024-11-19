@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#define MAX 100
 typedef struct{
-    char* nome;
-    char* isbn;
+    char nome[100];
+    char isbn[100];
     float preco;
     int score;
-    char* editora;
+    char editora[100];
 }livro, *pLivro;
 
 pLivro livro_aloc(int qtde);
@@ -32,11 +32,11 @@ pLivro livro_aloc(int qtde){
 }
 void livro_ler(pLivro livros, int qtde){
     for(int i=0; i<qtde; i++){
-        scanf("%s", livros[i].nome);
-        scanf("%s", livros[i].isbn);
-        scanf("%f", livros[i].preco);
-        scanf("%d", livros[i].score);
-        scanf("%s", livros[i].editora);
+        gets(livros[i].nome);
+        gets(livros[i].isbn);
+        scanf("%f", &livros[i].preco);
+        scanf("%d", &livros[i].score);
+        gets(livros[i].editora);
     }
 }
 void livro_exibe(pLivro livros, int qtde){
