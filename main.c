@@ -23,10 +23,13 @@ void clear(){
 int main(){
     int qtde;
     scanf("%d ", &qtde);
-    pLivro livros=livro_aloc(qtde);
-    livro_ler(livros, qtde);
-    livro_exibe(livros, qtde);
-    livro_desaloca(livros);    
+    if(qtde>0){
+        pLivro livros=livro_aloc(qtde);
+        livro_ler(livros, qtde);
+        livro_exibe(livros, qtde);
+        livro_desaloca(livros); 
+    }else
+        printf("Sem livros");
     return 0;
 }
 
